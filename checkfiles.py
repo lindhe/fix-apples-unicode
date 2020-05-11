@@ -16,13 +16,14 @@ docs = f"""
 Fixes problems mostly caused by Apple.
 
 USAGE:
-  {sys.argv[0]} PATH [--help] [--version]
+  {sys.argv[0]} PATH [options]
 
 ARGS:
   PATH              the path to check files in
 
 OPTIONS:
   -h --help         print this help and exit
+  -v --verbose      print more
   --version         print version and exit
 
 """
@@ -35,7 +36,7 @@ fix = {
     'ö': 'ö'
     }
 
-def main(path = '.'):
+def main(path = '.', verbose = False):
   """ Takes a path and checks the filenames for issues. """
   # This stolen from here: https://stackoverflow.com/a/3207973/893211
   original_filenames = []
@@ -45,7 +46,14 @@ def main(path = '.'):
   bad_filenames = findProblems(strings = original_filenames)
   fixed_filenames = [fixProblem(f) for f in bad_filenames]
   check_for_collisions(original_filenames, fixed_filenames)
-  pass
+  if verbose:
+    print("Original filenames: " + str(original_filenames))
+    print("Bad filenames: " + str(bad_filenames))
+    print("Fixed filenames: " + str(fixed_filenames))
+  else:
+    if bad_filenames:
+      print(bad_filenames)
+
 
 def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collision found!"):
   """ If elements in lists a and b are similar, print a warning and exit """
@@ -69,6 +77,6 @@ def fixProblem(bad_string: str) -> str:
 if __name__ == '__main__':
   args = docopt(docs, version=__version__)
   try:
-    main(path = args['PATH'])
+    main(path = args['PATH'], verbose = args['--verbose'])
   except KeyboardInterrupt:
     sys.exit("\nInterrupted by ^C\n")
