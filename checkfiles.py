@@ -5,7 +5,7 @@
 # Author: Andreas Lindhé
 
 from docopt import docopt
-from typing import List
+from typing import List, Dict
 import os
 import re
 import sys
@@ -44,16 +44,21 @@ def main(path, verbose = False):
     original_filenames.extend(filenames)
     break
   bad_filenames = findProblems(strings = original_filenames)
-  fixed_filenames = [fixProblem(f) for f in bad_filenames]
-  check_for_collisions(original_filenames, fixed_filenames)
+  fixes = findFixes(bad_filenames)
+  check_for_collisions(original_filenames, fixes.values())
   if verbose:
     print("Original filenames: " + str(original_filenames))
     print("Bad filenames: " + str(bad_filenames))
-    print("Fixed filenames: " + str(fixed_filenames))
-  else:
-    if bad_filenames:
-      print(bad_filenames)
+    print("Fixed filenames: " + str(fixes.values()))
+  for fix in fixes:
+    print("mv " + fix + " " + fixes[fix])
 
+
+def findFixes(broken_strings: List[str]) -> Dict[str,str]:
+  fixes = {}
+  for string in broken_strings:
+    fixes[string] = fixProblem(string)
+  return fixes
 
 def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collision found!"):
   """ If elements in lists a and b are similar, print a warning and exit """
