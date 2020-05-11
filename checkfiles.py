@@ -37,7 +37,11 @@ fix = {
 
 def main(path = '.'):
   """ Takes a path and checks the filenames for issues. """
-  original_filenames = os.listdir(path = path)
+  # This stolen from here: https://stackoverflow.com/a/3207973/893211
+  original_filenames = []
+  for (_, _, filenames) in os.walk(path):
+    original_filenames.extend(filenames)
+    break
   bad_filenames = findProblems(strings = original_filenames)
   fixed_filenames = [fixProblem(f) for f in bad_filenames]
   check_for_collisions(original_filenames, fixed_filenames)
