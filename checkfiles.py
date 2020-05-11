@@ -4,11 +4,28 @@
 # License: MIT
 # Author: Andreas Lindhé
 
+from docopt import docopt
 from typing import List
 import os
 import re
 import sys
 
+__version__ = "0.1.0"
+
+docs = f"""
+Fixes problems mostly caused by Apple.
+
+USAGE:
+  {sys.argv[0]} PATH [--help] [--version]
+
+ARGS:
+  PATH              the path to check files in
+
+OPTIONS:
+  -h --help         print this help and exit
+  --version         print version and exit
+
+"""
 
 # fix is a LUT from bad substring to good substring
 # Really hard to visually inspect,
@@ -43,7 +60,8 @@ def fixString(bad_string: str) -> str:
 
 
 if __name__ == '__main__':
+  args = docopt(docs, version=__version__)
   try:
-    main()
+    main(path = args['PATH'])
   except KeyboardInterrupt:
     sys.exit("\nInterrupted by ^C\n")
