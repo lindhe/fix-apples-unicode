@@ -42,6 +42,12 @@ def main(path = '.'):
   promptForReplacement(files_to_replace = bad_files)
   pass
 
+def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collision found!"):
+  """ If elements in lists a and b are similar, print a warning and exit """
+  collision = set(a) & set(b)
+  if collision:
+    sys.exit(warning + "\n\n" + str(collision))
+
 def promptForReplacement(files_to_replace: List[str]):
   pass
 
