@@ -37,9 +37,10 @@ fix = {
 
 def main(path = '.'):
   """ Takes a path and checks the filenames for issues. """
-  all_files = os.listdir(path = path)
-  bad_files = findProblems(files = all_files)
-  promptForReplacement(files_to_replace = bad_files)
+  original_filenames = os.listdir(path = path)
+  bad_filenames = findProblems(files = original_filenames)
+  fixed_filenames = [fixProblem(f) for f in bad_filenames]
+  check_for_collisions(original_filenames, fixed_filenames)
   pass
 
 def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collision found!"):
@@ -49,6 +50,7 @@ def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collisi
     sys.exit(warning + "\n\n" + str(collision))
 
 def promptForReplacement(files_to_replace: List[str]):
+  """ Prompts the user to rename files """
   pass
 
 def findProblems(strings: List[str]) -> List[str]:
@@ -58,7 +60,7 @@ def findProblems(strings: List[str]) -> List[str]:
   return bad_strings
 
 
-def fixString(bad_string: str) -> str:
+def fixProblem(bad_string: str) -> str:
   """ Takes a bad string and fixes it """
   for shit in fix:
       bad_string = re.sub(pattern=shit, repl=fix[shit], string=bad_string)
