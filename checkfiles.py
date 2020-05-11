@@ -36,7 +36,7 @@ fix = {
     'ö': 'ö'
     }
 
-def main(path = '.', verbose = False):
+def main(path, verbose = False):
   """ Takes a path and checks the filenames for issues. """
   # This stolen from here: https://stackoverflow.com/a/3207973/893211
   original_filenames = []
