@@ -53,16 +53,11 @@ def check_for_collisions(a: List[str], b: List[str], warning = "WARNING! Collisi
   if collision:
     sys.exit(warning + "\n\n" + str(collision))
 
-def promptForReplacement(files_to_replace: List[str]):
-  """ Prompts the user to rename files """
-  pass
-
 def findProblems(strings: List[str]) -> List[str]:
   bad_strings: List[str] = []
   for shit in fix:
     bad_strings = bad_strings + [s for s in strings if shit in s]
   return bad_strings
-
 
 def fixProblem(bad_string: str) -> str:
   """ Takes a bad string and fixes it """
