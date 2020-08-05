@@ -15,6 +15,8 @@ __version__ = "0.1.0"
 docs = f"""
 Fixes problems mostly caused by Apple.
 
+Prints a list of `mv` commands that fixes the found issues.
+
 USAGE:
   {sys.argv[0]} PATH [options]
 
