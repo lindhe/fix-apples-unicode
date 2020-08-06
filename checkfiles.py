@@ -6,6 +6,7 @@
 
 from docopt import docopt
 from typing import List, Dict
+from pathlib import Path
 import os
 import re
 import sys
@@ -46,11 +47,12 @@ def main(path, verbose=False):
     for (_, _, filenames) in os.walk(path):
         original_filenames.extend(filenames)
         break
-    bad_filenames = findProblems(strings=original_filenames)
+    original_files = [str(Path(path).joinpath(f)) for f in original_filenames]
+    bad_filenames = findProblems(strings=original_files)
     fixes = findFixes(bad_filenames)
-    check_for_collisions(original_filenames, fixes.values())
+    check_for_collisions(original_files, fixes.values())
     if verbose:
-        print("Original filenames: " + str(original_filenames))
+        print("Original filenames: " + str(original_files))
         print("Bad filenames: " + str(bad_filenames))
         print("Fixed filenames: " + str(fixes.values()))
     for fix in fixes:
