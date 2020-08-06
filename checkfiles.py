@@ -30,10 +30,10 @@ OPTIONS:
 
 """
 
-# fix is a LUT from bad substring to good substring
+# characters_to_fix is a LUT from bad substring to good substring
 # Really hard to visually inspect,
 # but I promise the key is not what it looks like.
-fix = {
+characters_to_fix = {
     'ä': 'ä',
     'ö': 'ö'
     }
@@ -74,15 +74,18 @@ def check_for_collisions(a: List[str], b: List[str],
 
 def findProblems(strings: List[str]) -> List[str]:
     bad_strings: List[str] = []
-    for shit in fix:
-        bad_strings = bad_strings + [s for s in strings if shit in s]
+    for bad_char in characters_to_fix:
+        bad_strings = bad_strings + [s for s in strings if bad_char in s]
     return bad_strings
 
 
 def fixProblem(bad_string: str) -> str:
     """ Takes a bad string and fixes it """
-    for shit in fix:
-        bad_string = re.sub(pattern=shit, repl=fix[shit], string=bad_string)
+    for bad_char in characters_to_fix:
+        bad_string = re.sub(
+            pattern=bad_char,
+            repl=characters_to_fix[bad_char],
+            string=bad_string)
     return bad_string
 
 
