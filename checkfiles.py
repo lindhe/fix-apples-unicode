@@ -34,7 +34,9 @@ OPTIONS:
 # characters_to_fix is a LUT from bad substring to good substring
 # Really hard to visually inspect,
 # but I promise the key is not what it looks like.
+# Here's a good website to inspect them: <https://babelstone.co.uk/Unicode/whatisit.html>
 characters_to_fix = {
+    'å': 'å',
     'ä': 'ä',
     'ö': 'ö'
     }
