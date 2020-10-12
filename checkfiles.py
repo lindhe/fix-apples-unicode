@@ -11,7 +11,7 @@ import os
 import re
 import sys
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 docs = f"""
 Fixes problems mostly caused by Apple.
@@ -56,7 +56,7 @@ def main(path, verbose=False):
         print("Bad filenames: " + str(bad_filenames))
         print("Fixed filenames: " + str(fixes.values()))
     for fix in fixes:
-        print("mv " + fix + " " + fixes[fix])
+        print("mv -i " + fix + " " + fixes[fix])
 
 
 def findFixes(broken_strings: List[str]) -> Dict[str, str]:
