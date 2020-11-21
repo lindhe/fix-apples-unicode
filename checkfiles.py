@@ -11,7 +11,7 @@ import os
 import re
 import sys
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 docs = f"""
 Fixes problems mostly caused by Apple.
@@ -38,7 +38,10 @@ OPTIONS:
 characters_to_fix = {
     'å': 'å',
     'ä': 'ä',
-    'ö': 'ö'
+    'ö': 'ö',
+    'Å': 'Å',
+    'Ä': 'Ä',
+    'Ö': 'Ö'
     }
 
 
