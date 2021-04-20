@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.8
 # -*- coding: utf-8 -*-
 #
 # License: MIT
@@ -11,7 +11,7 @@ import os
 import re
 import sys
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 docs = f"""
 Fixes problems mostly caused by Apple.
