@@ -1,9 +1,13 @@
 # fix-apples-unicode
 
-Apple uses ö instead of ö and I need to fix that.
+Apple uses composite characters instead of proper Unicode characters for umlauts and overrings, and I need to fix that.
 
+* å --> å
 * ä --> ä
 * ö --> ö
+* Å --> Å
+* Ä --> Ä
+* Ö --> Ö
 
 Here's a good website to inspect the characters above: <https://babelstone.co.uk/Unicode/whatisit.html>
 
